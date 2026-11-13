@@ -23,3 +23,8 @@ See ICON-LICENSE.txt and OCTICONS-LICENSE.txt.
 
 Google Material Web and its bundled runtime dependencies retain their complete
 notices in ../vendor/MATERIAL-LICENSE.txt.
+
+Windows 11 and Linux brand glyphs are Simple Icons 11.15.0, pinned to
+commit 0af835e2949a9222965522780e5e0810d3c53382, icons/windows11.svg and icons/linux.svg.
+The icon collection is CC0-1.0; see SIMPLEICONS-LICENSE.txt. Brand names
+and marks identify the target platform, without endorsement or affiliation.

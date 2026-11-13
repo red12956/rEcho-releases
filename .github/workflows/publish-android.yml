@@ -1,0 +1,181 @@
+name: Publish Android release
+run-name: Publish Android from ${{ inputs.source_commit }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      artifact_url:
+        description: Short-lived download URL for the verified private Android build artifact
+        required: true
+        type: string
+      artifact_digest:
+        description: "GitHub artifact archive SHA-256 (sha256: prefix allowed)"
+        required: true
+        type: string
+      source_commit:
+        description: Complete source commit of the successful signed Android build
+        required: true
+        type: string
+      certificate_sha256:
+        description: Permanent Android release certificate SHA-256
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'red12956/rEcho-releases'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      # Do this before checkout or SDK setup: GitHub artifact URLs expire quickly.
+      # The public runner receives only this intended release artifact, never a
+      # private repository token, checkout, signing key or workspace content.
+      - name: Receive and validate the signed build artifact
+        id: package
+        env:
+          ARTIFACT_DIGEST: ${{ inputs.artifact_digest }}
+          SOURCE_COMMIT: ${{ inputs.source_commit }}
+          RELEASE_CERTIFICATE: ${{ inputs.certificate_sha256 }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, re, shutil, stat, urllib.parse, urllib.request, zipfile
+          event = json.loads(pathlib.Path(os.environ['GITHUB_EVENT_PATH']).read_text())
+          url = event['inputs']['artifact_url']
+          print('::add-mask::' + url.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A'))
+          expected = os.environ['ARTIFACT_DIGEST'].removeprefix('sha256:').lower()
+          commit = os.environ['SOURCE_COMMIT']
+          certificate = os.environ['RELEASE_CERTIFICATE'].replace(':', '').lower()
+          if not re.fullmatch('[0-9a-f]{64}', expected) or not re.fullmatch('[0-9a-f]{40}', commit) or not re.fullmatch('[0-9a-f]{64}', certificate):
+              raise SystemExit('Invalid artifact digest, source commit or certificate fingerprint.')
+          def validate_url(value):
+              parsed = urllib.parse.urlsplit(value)
+              allowed = ('.blob.core.windows.net', '.results.githubusercontent.com', '.actions.githubusercontent.com')
+              if parsed.scheme != 'https' or not parsed.hostname or not parsed.hostname.endswith(allowed) or parsed.username or parsed.password or parsed.fragment:
+                  raise ValueError('Only HTTPS GitHub Actions artifact storage URLs are accepted.')
+          class Redirects(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, req, fp, code, msg, headers, newurl):
+                  validate_url(newurl)
+                  return super().redirect_request(req, fp, code, msg, headers, newurl)
+          validate_url(url)
+          root = pathlib.Path(os.environ['RUNNER_TEMP']) / 'android-release'
+          root.mkdir(mode=0o700)
+          archive = root / 'artifact.zip'
+          digest = hashlib.sha256()
+          received = 0
+          try:
+              with urllib.request.build_opener(Redirects()).open(url, timeout=30) as response, archive.open('xb') as output:
+                  while chunk := response.read(1024 * 1024):
+                      received += len(chunk)
+                      if received > 512 * 1024 * 1024:
+                          raise ValueError('Artifact archive exceeds 512 MiB.')
+                      digest.update(chunk)
+                      output.write(chunk)
+          except Exception:
+              raise SystemExit('Artifact download failed. Obtain a fresh signed artifact URL before dispatching again.') from None
+          if digest.hexdigest() != expected:
+              raise SystemExit('Artifact archive SHA-256 does not match GitHub metadata.')
+          names = ('recho-android-arm64.apk', 'recho-android-arm64.apk.build.json')
+          with zipfile.ZipFile(archive) as package:
+              for name in names:
+                  matches = [item for item in package.infolist() if item.filename == name]
+                  if len(matches) != 1:
+                      raise SystemExit('Expected one signed APK and one matching build manifest.')
+                  item = matches[0]
+                  limit = 256 * 1024 * 1024 if name.endswith('.apk') else 16384
+                  if item.is_dir() or stat.S_ISLNK(item.external_attr >> 16) or item.flag_bits & 1 or not 0 < item.file_size <= limit:
+                      raise SystemExit('Invalid release archive entry.')
+                  with package.open(item) as source, (root / name).open('xb') as output:
+                      copied = 0
+                      while chunk := source.read(1024 * 1024):
+                          copied += len(chunk)
+                          if copied > limit:
+                              raise SystemExit('Release archive entry exceeds its limit.')
+                          output.write(chunk)
+                      if copied != item.file_size:
+                          raise SystemExit('Truncated release archive entry.')
+          archive.unlink()
+          manifest = json.loads((root / names[1]).read_text())
+          version = manifest.get('version')
+          build = manifest.get('build')
+          count = manifest.get('commitCount')
+          parts = [int(part) for part in version.split('.')] if isinstance(version, str) and re.fullmatch(r'\d+\.\d+\.\d+', version) else []
+          if (manifest.get('schema') != 1 or manifest.get('applicationId') != 'com.tianyu.recho' or manifest.get('dirty') is not False or
+              manifest.get('commit') != commit or type(build) is not int or type(count) is not int or count < 1 or build != 10000 + count or
+              len(parts) != 3 or not 1 <= parts[0] <= 65535 or any(not 0 <= part <= 65535 for part in parts) or parts[2] != build):
+              raise SystemExit('Expected a clean matching official rEcho build manifest.')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write(f'version={version}\nbuild={build}\n')
+          PY
+      - name: Prepare Android inspection tools
+        run: |
+          set -euo pipefail
+          test -n "$JAVA_HOME_25_X64"
+          echo "JAVA_HOME=$JAVA_HOME_25_X64" >> "$GITHUB_ENV"
+          echo "$JAVA_HOME_25_X64/bin" >> "$GITHUB_PATH"
+          JAVA_HOME="$JAVA_HOME_25_X64" "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'build-tools;37.0.0'
+      - name: Verify APK identity and create public update files
+        env:
+          RELEASE_CERTIFICATE: ${{ inputs.certificate_sha256 }}
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, re, subprocess
+          root = pathlib.Path(os.environ['RUNNER_TEMP']) / 'android-release'
+          apk = root / 'recho-android-arm64.apk'
+          built = json.loads((root / 'recho-android-arm64.apk.build.json').read_text())
+          tools = pathlib.Path(os.environ['ANDROID_HOME']) / 'build-tools/37.0.0'
+          def run(arguments):
+              result = subprocess.run(arguments, text=True, capture_output=True)
+              if result.returncode:
+                  raise SystemExit('Android package inspection failed.')
+              return result.stdout
+          signature = run(['java', '-jar', str(tools / 'lib/apksigner.jar'), 'verify', '--verbose', '--print-certs', str(apk)])
+          certificates = {value.replace(':', '').lower() for value in re.findall(r'^(?:V\d+(?:\.\d+)? )?Signer(?: #\d+)?:? certificate SHA-256 digest:[ \t]*([0-9a-f:]+)[ \t]*$', signature, re.M | re.I)}
+          if certificates != {os.environ['RELEASE_CERTIFICATE'].replace(':', '').lower()}:
+              raise SystemExit('APK release certificate does not match.')
+          badging = run([str(tools / 'aapt2'), 'dump', 'badging', str(apk)])
+          identity = re.search(r"^package: name='([^']+)' versionCode='([^']+)' versionName='([^']+)'", badging, re.M)
+          if (not identity or identity.groups() != ('com.tianyu.recho', str(built['build']), built['version']) or
+              not re.search(r"^native-code:\s*'arm64-v8a'\s*$", badging, re.M) or re.search(r'^application-debuggable', badging, re.M)):
+              raise SystemExit('APK identity, version, release mode or architecture does not match.')
+          digest = hashlib.file_digest(apk.open('rb'), 'sha256').hexdigest()
+          manifest = {'schema': 1, 'version': built['version'], 'build': built['build'], 'notes': 'rEcho for Android · ARM64.', 'assets': [{
+              'platform': 'android', 'arch': 'arm64', 'url': f"https://github.com/red12956/rEcho-releases/releases/download/v{built['version']}/{apk.name}",
+              'size': apk.stat().st_size, 'sha256': digest}]}
+          (root / 'update.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + '\n')
+          (root / 'release-notes.md').write_text('rEcho for Android · ARM64 · APK.\n')
+          names = (apk.name, 'update.json')
+          (root / 'SHA256SUMS').write_text(''.join(f"{hashlib.file_digest((root / name).open('rb'), 'sha256').hexdigest()}  {name}\n" for name in names))
+          PY
+      - name: Upload a draft, verify remote assets, then publish stable
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ steps.package.outputs.version }}
+        run: |
+          set -euo pipefail
+          root="$RUNNER_TEMP/android-release"
+          tag="v$RELEASE_VERSION"
+          gh release create "$tag" --repo "$GITHUB_REPOSITORY" --draft --title "rEcho $RELEASE_VERSION" --notes-file "$root/release-notes.md" "$root/recho-android-arm64.apk" "$root/update.json" "$root/SHA256SUMS"
+          gh api "repos/$GITHUB_REPOSITORY/releases/tags/$tag" > "$root/remote-release.json"
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib
+          root = pathlib.Path(os.environ['RUNNER_TEMP']) / 'android-release'
+          release = json.loads((root / 'remote-release.json').read_text())
+          names = {'recho-android-arm64.apk', 'update.json', 'SHA256SUMS'}
+          assets = release.get('assets', [])
+          if release.get('draft') is not True or len(assets) != 3 or {asset['name'] for asset in assets} != names:
+              raise SystemExit('The draft does not contain exactly the intended public assets.')
+          for asset in assets:
+              local = root / asset['name']
+              expected = 'sha256:' + hashlib.file_digest(local.open('rb'), 'sha256').hexdigest()
+              if asset.get('state') != 'uploaded' or asset.get('size') != local.stat().st_size or asset.get('digest') != expected:
+                  raise SystemExit('Uploaded asset integrity could not be established; the release remains a draft.')
+          PY
+          gh release edit "$tag" --repo "$GITHUB_REPOSITORY" --draft=false --latest
+          echo "Published rEcho $RELEASE_VERSION for Android ARM64." >> "$GITHUB_STEP_SUMMARY"
