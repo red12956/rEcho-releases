@@ -6,14 +6,90 @@
   <meta name="color-scheme" content="light dark">
   <meta name="description" content="rEcho — reading, handwriting, and questions.">
   <title>rEcho</title>
-  <link rel="icon" href="assets/app-icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
-  <script type="module" src="app.mjs"></script>
+  <link rel="icon" href="assets/app-icon.svg?v=7d8317f7d6a854a3" type="image/svg+xml">
+  <style>:root {
+  color-scheme: light dark;
+  --md-sys-color-primary: #2d568d;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-surface: #f8f9fc;
+  --md-sys-color-on-surface: #1b1c20;
+  --md-sys-color-on-surface-variant: #44474e;
+  --md-sys-color-secondary-container: #dce7f8;
+  --md-sys-color-on-secondary-container: #162b49;
+  --md-sys-typescale-label-large-font: system-ui, sans-serif;
+  --md-filled-tonal-button-container-shape: 16px;
+  font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans SC", sans-serif;
+  font-synthesis: none;
+  line-height: 1.5;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+}
+main {
+  width: min(calc(100% - 48px), 400px);
+  margin: clamp(48px, 15vh, 160px) auto 48px;
+  text-align: center;
+}
+.app-icon { display: block; margin: 0 auto;  }
+h1 { margin: 16px 0 4px; font-size: 36px; font-weight: 500; letter-spacing: -1px; }
+.description { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: 15px; }
+#downloads { margin-top: 32px; }
+#release-status {
+  min-height: 24px;
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+.downloads { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+md-filled-tonal-button { min-height: 56px; --md-filled-tonal-button-label-text-size: 14px; }
+nav { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 24px; }
+md-icon-button { width: 48px; height: 48px; }
+md-icon-button svg { width: 24px; height: 24px; fill: currentColor; }
+[hidden] { display: none !important; }
+noscript a { color: var(--md-sys-color-primary); }
+@media (prefers-color-scheme: dark) {
+  :root {
+    --md-sys-color-primary: #a6c7fa;
+    --md-sys-color-on-primary: #142e4d;
+    --md-sys-color-surface: #101318;
+    --md-sys-color-on-surface: #edf0f7;
+    --md-sys-color-on-surface-variant: #bfc6d2;
+    --md-sys-color-secondary-container: #304767;
+    --md-sys-color-on-secondary-container: #dce7f8;
+  }
+}
+@media (max-width: 340px) { .downloads { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) {
+  md-filled-tonal-button, md-icon-button { --md-ripple-hover-duration: 0ms; --md-ripple-pressed-duration: 0ms; }
+}
+
+md-filled-tonal-button:not(:defined) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  font-size: 14px;
+}
+md-filled-tonal-button:not(:defined)[disabled] { opacity: .5; }
+md-icon-button:not(:defined) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--md-sys-color-on-surface-variant);
+}
+</style>
+  <script type="module" src="app.6332536e65582347.js"></script>
 </head>
 <body>
   <main>
     <header>
-      <img class="app-icon" src="assets/app-icon.svg" width="80" height="80" alt="">
+      <img class="app-icon" src="assets/app-icon.svg?v=7d8317f7d6a854a3" width="80" height="80" alt="">
       <h1>rEcho</h1>
       <p class="description" data-i18n="description">阅读 · 书写 · 提问</p>
     </header>
@@ -28,16 +104,16 @@
     </section>
     <nav aria-label="链接与语言">
       <md-icon-button href="https://github.com/red12956/rEcho-releases" data-label="github">
-        <svg aria-hidden="true"><use href="assets/actions.svg#github"></use></svg>
+        <svg aria-hidden="true"><use href="assets/actions.svg?v=d0c0e0d5b01aaa69#github"></use></svg>
       </md-icon-button>
       <md-icon-button id="release-notes" data-label="releaseNotes" hidden>
-        <svg aria-hidden="true"><use href="assets/actions.svg#history"></use></svg>
+        <svg aria-hidden="true"><use href="assets/actions.svg?v=d0c0e0d5b01aaa69#history"></use></svg>
       </md-icon-button>
       <md-icon-button id="language" data-label="languageLabel">
-        <svg aria-hidden="true"><use href="assets/actions.svg#translate"></use></svg>
+        <svg aria-hidden="true"><use href="assets/actions.svg?v=d0c0e0d5b01aaa69#translate"></use></svg>
       </md-icon-button>
       <md-icon-button id="retry" data-label="retry" hidden>
-        <svg aria-hidden="true"><use href="assets/actions.svg#refresh"></use></svg>
+        <svg aria-hidden="true"><use href="assets/actions.svg?v=d0c0e0d5b01aaa69#refresh"></use></svg>
       </md-icon-button>
     </nav>
     <noscript><a href="https://github.com/red12956/rEcho-releases/releases">下载 / Downloads</a></noscript>
