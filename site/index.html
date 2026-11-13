@@ -4,62 +4,43 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="rEcho — a native workspace for reading, handwriting, and asking questions with visual context.">
-  <title>rEcho · 阅读，落笔，再想一步</title>
-  <link rel="icon" href="assets/pen.svg" type="image/svg+xml">
+  <meta name="description" content="rEcho — reading, handwriting, and questions.">
+  <title>rEcho</title>
+  <link rel="icon" href="assets/app-icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <script type="module" src="app.mjs"></script>
 </head>
 <body>
-  <header class="site-header wrap">
-    <a class="brand" href="#" aria-label="rEcho"><img src="assets/pen.svg" alt="" width="28" height="28">rEcho</a>
-    <nav aria-label="Navigation">
-      <a href="#download" data-i18n="navDownload">下载</a>
-      <a href="#questions" data-i18n="navQuestions">常见问题</a>
-      <button id="language" class="language" type="button" aria-label="Switch to English">English</button>
-    </nav>
-  </header>
   <main>
-    <section class="hero wrap">
-      <div class="hero-copy">
-        <p class="eyebrow" data-i18n="eyebrow">为思考留一块画布</p>
-        <h1 data-i18n="headline">阅读，落笔，<br>再想一步。</h1>
-        <p class="lead" data-i18n="intro">把文档、手写和 AI 对话放在同一处。读一页，写下想法，圈出问题，然后继续。</p>
-        <a class="button primary" href="#download" data-i18n="getApp">获取 rEcho</a>
-        <p class="quiet hero-note" data-i18n="offline">本地保存 · 离线阅读与书写 · 按需连接 AI</p>
+    <header>
+      <img class="app-icon" src="assets/app-icon.svg" width="80" height="80" alt="">
+      <h1>rEcho</h1>
+      <p class="description" data-i18n="description">阅读 · 书写 · 提问</p>
+    </header>
+    <section aria-label="下载" id="downloads">
+      <p id="release-status" role="status" aria-live="polite">正在检查版本…</p>
+      <div class="downloads">
+        <md-filled-tonal-button data-target="windows-x64" disabled>Windows · x64</md-filled-tonal-button>
+        <md-filled-tonal-button data-target="windows-arm64" disabled>Windows · ARM64</md-filled-tonal-button>
+        <md-filled-tonal-button data-target="android-arm64" disabled>Android · APK</md-filled-tonal-button>
+        <md-filled-tonal-button data-target="linux-x64" disabled>Linux · DEB</md-filled-tonal-button>
       </div>
-      <div class="study-loop" aria-labelledby="loop-title">
-        <p id="loop-title" class="eyebrow" data-i18n="loopTitle">一个简单的学习循环</p>
-        <div class="loop-step"><span class="step-number">01</span><div><h2 data-i18n="read">读进去</h2><p data-i18n="readDetail">打开 Markdown 或 PDF，让原文成为思考的起点。</p></div></div>
-        <div class="loop-step"><span class="step-number">02</span><div><h2 data-i18n="write">写下来</h2><p data-i18n="writeDetail">用圆珠笔、铅笔或荧光笔批注，在页边展开推导。</p></div></div>
-        <div class="loop-step"><span class="step-number">03</span><div><h2 data-i18n="ask">问清楚</h2><p data-i18n="askDetail">圈选文档与笔迹，向助手提问，保留对话与上下文。</p></div></div>
-      </div>
     </section>
-    <section class="principles wrap" aria-label="Features">
-      <article><h2 data-i18n="localTitle">思考留在本地</h2><p data-i18n="localDetail">画板、笔迹和会话保存在工作区。无需账号即可阅读与书写，也可导出工作区备份。</p></article>
-      <article><h2 data-i18n="penTitle">从笔尖开始</h2><p data-i18n="penDetail">原生文档与手写画布，支持压感设备，也能使用鼠标与触摸操作。</p></article>
-      <article><h2 data-i18n="aiTitle">AI 由你选择</h2><p data-i18n="aiDetail">配置自己的提供商与模型。AI 回答留在助手中，原始文档保持只读。</p></article>
-    </section>
-    <section id="download" class="downloads wrap">
-      <div class="section-heading"><div><p class="eyebrow" data-i18n="downloadEyebrow">带到你的设备上</p><h2 data-i18n="downloadTitle">下载 rEcho</h2></div><a id="release-notes" class="text-link" hidden data-i18n="releaseNotes">版本说明 ↗</a></div>
-      <p id="release-status" class="quiet" role="status" data-i18n="loading">正在检查可用版本…</p>
-      <div class="download-grid">
-        <article class="download-card" data-target="windows-x64"><h3>Windows</h3><p>Windows 11 · x64</p><a class="button secondary" hidden data-i18n="downloadInstaller">下载安装程序</a><span class="quiet availability" data-i18n="preparing">尚未发布</span></article>
-        <article class="download-card" data-target="windows-arm64"><h3>Windows ARM</h3><p>Windows 11 · ARM64</p><a class="button secondary" hidden data-i18n="downloadInstaller">下载安装程序</a><span class="quiet availability" data-i18n="preparing">尚未发布</span></article>
-        <article class="download-card" data-target="android-arm64"><h3>Android</h3><p>Android 12+ · ARM64 · APK</p><a class="button secondary" hidden data-i18n="downloadInstaller">下载安装程序</a><span class="quiet availability" data-i18n="preparing">尚未发布</span></article>
-        <article class="download-card" data-target="linux-x64"><h3>Linux</h3><p>Ubuntu 24.04 · x64 · Debian</p><a class="button secondary" hidden data-i18n="downloadInstaller">下载安装程序</a><span class="quiet availability" data-i18n="preparing">尚未发布</span></article>
-      </div>
-      <button id="retry" class="language" type="button" hidden data-i18n="retry">重新检查</button>
-      <p class="quiet download-note" data-i18n="downloadNote">安装包由 GitHub Releases 提供。仅显示已经发布的版本；macOS 与 iOS 暂未提供公开下载。</p>
-      <noscript><p>请启用 JavaScript 查看可用安装包，或直接访问 <a href="https://github.com/red12956/rEcho-releases/releases">GitHub Releases</a>。 Enable JavaScript to check downloads, or visit GitHub Releases.</p></noscript>
-    </section>
-    <section id="questions" class="questions wrap">
-      <p class="eyebrow" data-i18n="questionsEyebrow">开始之前</p><h2 data-i18n="questionsTitle">几个常见问题</h2>
-      <details><summary data-i18n="accountQuestion">需要账号或 AI 密钥吗？</summary><p data-i18n="accountAnswer">阅读、书写与本地保存无需账号或密钥。使用 AI 助手时，需要配置自己的提供商和模型。</p></details>
-      <details><summary data-i18n="originalQuestion">会修改原始文件吗？</summary><p data-i18n="originalAnswer">不会。导入的 Markdown 与 PDF 是只读快照，笔迹和对话由 rEcho 单独保存。工作区里的文件也可用系统默认应用打开。</p></details>
-      <details><summary data-i18n="updateQuestion">之后如何更新？</summary><p data-i18n="updateAnswer">在设置 → 关于中检查更新。支持的构建可在应用内下载并校验安装包，然后交给系统安装；安装仍需你确认。</p></details>
-    </section>
+    <nav aria-label="链接与语言">
+      <md-icon-button href="https://github.com/red12956/rEcho-releases" data-label="github">
+        <svg aria-hidden="true"><use href="assets/actions.svg#github"></use></svg>
+      </md-icon-button>
+      <md-icon-button id="release-notes" data-label="releaseNotes" hidden>
+        <svg aria-hidden="true"><use href="assets/actions.svg#history"></use></svg>
+      </md-icon-button>
+      <md-icon-button id="language" data-label="languageLabel">
+        <svg aria-hidden="true"><use href="assets/actions.svg#translate"></use></svg>
+      </md-icon-button>
+      <md-icon-button id="retry" data-label="retry" hidden>
+        <svg aria-hidden="true"><use href="assets/actions.svg#refresh"></use></svg>
+      </md-icon-button>
+    </nav>
+    <noscript><a href="https://github.com/red12956/rEcho-releases/releases">下载 / Downloads</a></noscript>
   </main>
-  <footer class="wrap"><a class="brand" href="#">rEcho</a><p data-i18n="footer">留出思考的空间。</p><a href="https://github.com/red12956/rEcho-releases" data-i18n="github">GitHub 发布仓库 ↗</a></footer>
 </body>
 </html>

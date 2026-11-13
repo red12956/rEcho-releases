@@ -9,3 +9,16 @@ Path: symbols/web/draw/materialsymbolsrounded/draw_24px.svg
 License: Apache License 2.0; see ICON-LICENSE.txt in this directory.
 
 The icon does not imply Google endorsement of rEcho.
+
+The blue rEcho application mark is the existing application adaptation in
+assets/app_icon/icon.svg; its source Material Symbols draw geometry is Apache-2.0.
+
+Action symbols translate, history and refresh are Google Material Symbols Rounded,
+from google/material-design-icons commit 10ecc14790612ca8fd164e3f4ffe9c16fc50d5b7,
+symbols/web/NAME/materialsymbolsrounded/NAME_24px.svg (Apache-2.0).
+The GitHub brand glyph is Primer Octicons mark-github-24.svg,
+primer/octicons commit 68ec2de8d0ddfcbb7497da01d0b7d98eb5593020 (MIT).
+See ICON-LICENSE.txt and OCTICONS-LICENSE.txt.
+
+Google Material Web and its bundled runtime dependencies retain their complete
+notices in ../vendor/MATERIAL-LICENSE.txt.

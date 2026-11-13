@@ -1,3 +1,4 @@
+import './vendor/material.js';
 import {fetchLatestRelease} from './releases.mjs';
 import {strings, resolveWebsiteLocale} from './strings.mjs';
 
@@ -14,30 +15,30 @@ const retry = document.querySelector('#retry');
 function render() {
   const text = strings[locale];
   document.documentElement.lang = locale === 'zh' ? 'zh-Hans' : 'en';
-  document.title = text.pageTitle;
+  document.title = 'rEcho';
   document.querySelectorAll('[data-i18n]').forEach(node => {
     node.textContent = text[node.dataset.i18n];
   });
   document.querySelector('nav').setAttribute('aria-label', text.navigationLabel);
-  document.querySelector('.principles').setAttribute('aria-label', text.featuresLabel);
-  language.textContent = locale === 'zh' ? 'English' : '简体中文';
-  language.setAttribute('aria-label', text.languageLabel);
+  document.querySelector('#downloads').setAttribute('aria-label', text.downloadsLabel);
+  document.querySelectorAll('[data-label]').forEach(node => {
+    node.setAttribute('aria-label', text[node.dataset.label]);
+    node.title = text[node.dataset.label];
+  });
   status.textContent = state === 'available'
     ? text.version.replace('{version}', release.version)
     : text[state];
   retry.hidden = state !== 'unavailable';
   notes.hidden = !release;
   if (release) notes.href = release.notesUrl;
-  for (const card of document.querySelectorAll('[data-target]')) {
-    const download = release?.downloads[card.dataset.target];
-    const link = card.querySelector('a');
-    link.hidden = !download;
-    const availability = card.querySelector('.availability');
-    availability.hidden = Boolean(download);
-    availability.textContent = state === 'loading' ? text.downloadPending
-      : state === 'unavailable' ? text.downloadUnavailable : text.preparing;
-    if (download) link.href = download.url;
-    else link.removeAttribute('href');
+  for (const button of document.querySelectorAll('[data-target]')) {
+    const download = release?.downloads[button.dataset.target];
+    button.disabled = !download;
+    const label = download ? text.download.replace('{platform}', button.textContent.trim()) : text.preparing;
+    button.setAttribute('aria-label', label);
+    button.title = label;
+    if (download) button.href = download.url;
+    else button.removeAttribute('href');
   }
 }
 
