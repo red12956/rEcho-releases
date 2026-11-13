@@ -1,0 +1,11 @@
+rEcho website icon attribution
+
+pen.svg is Google's Material Symbols Rounded "draw", optical size 24,
+weight 400, grade 0, unfilled, used as the rEcho application mark.
+
+Upstream: https://github.com/google/material-design-icons
+Commit: 10ecc14790612ca8fd164e3f4ffe9c16fc50d5b7
+Path: symbols/web/draw/materialsymbolsrounded/draw_24px.svg
+License: Apache License 2.0; see ICON-LICENSE.txt in this directory.
+
+The icon does not imply Google endorsement of rEcho.
