@@ -14,7 +14,7 @@ The website mark uses the original draw outline on transparency, in blue
 Material primary tones for light/dark appearance, with no background plate.
 Its source Material Symbols draw geometry is Apache-2.0.
 
-Action symbols translate, history and refresh are Google Material Symbols Rounded,
+Action symbols translate, history, refresh, desktop_windows, android and download are Google Material Symbols Rounded,
 from google/material-design-icons commit 10ecc14790612ca8fd164e3f4ffe9c16fc50d5b7,
 symbols/web/NAME/materialsymbolsrounded/NAME_24px.svg (Apache-2.0).
 The GitHub brand glyph is Primer Octicons mark-github-24.svg,
