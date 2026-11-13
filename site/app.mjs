@@ -34,7 +34,9 @@ function render() {
   for (const button of document.querySelectorAll('[data-target]')) {
     const download = release?.downloads[button.dataset.target];
     button.disabled = !download;
-    const label = download ? text.download.replace('{platform}', button.textContent.trim()) : text.preparing;
+    const label = download ? text.download.replace('{platform}', button.textContent.trim())
+      : state === 'loading' ? text.loading
+      : state === 'unavailable' ? text.unavailable : text.preparing;
     button.setAttribute('aria-label', label);
     button.title = label;
     if (download) button.href = download.url;
