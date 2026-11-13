@@ -22,6 +22,7 @@
   --md-sys-typescale-body-large-font: system-ui, sans-serif;
   --md-filled-tonal-button-container-shape: 8px;
   --md-menu-container-shape: 16px;
+  --download-row-gap: 12px;
   font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans SC", sans-serif;
   font-synthesis: none;
   line-height: 1.5;
@@ -56,10 +57,11 @@ h1 { margin: 12px 0 4px; font-size: 36px; line-height: 1.25; font-weight: 500; l
 .package-version { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: 13px; }
 md-circular-progress { width: 20px; height: 20px; --md-circular-progress-size: 20px; --md-circular-progress-active-indicator-width: 3px; }
 md-circular-progress:not(:defined) { visibility: hidden; }
-.package-options { display: grid; gap: 8px; margin-top: 8px; }
+.package-options { display: grid; gap: var(--download-row-gap); margin-top: 8px; }
 .linux-package { display: flex; flex-direction: column; }
-.linux-package .package-options { display: flex; flex: 1; flex-direction: column; justify-content: space-between; gap: 24px; }
-.architecture-group { display: grid; gap: 8px; }
+.linux-package .package-options { display: grid; flex: 1; grid-template-rows: max-content minmax(24px, 1fr) max-content; gap: 0; }
+.architecture-group { display: grid; gap: var(--download-row-gap); }
+.architecture-divider { align-self: center; width: 100%; }
 .package-option { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 40px; }
 .package-details { display: flex; align-items: baseline; flex-wrap: wrap; column-gap: 12px; row-gap: 2px; margin: 0; font-size: 13px; color: var(--md-sys-color-on-surface-variant); }
 .package-spec { display: grid; grid-template-columns: 6ch 4ch; column-gap: 8px; }
@@ -96,7 +98,7 @@ noscript a { display: inline-block; margin-top: 24px; color: var(--md-sys-color-
   #downloads { margin-top: 36px; }
   .downloads { grid-template-columns: 1fr; gap: 12px; }
   .download-column { gap: 12px; }
-  .linux-package .package-options { flex: none; gap: 20px; }
+  .linux-package .package-options { flex: none; grid-template-rows: max-content 32px max-content; gap: 0; }
   .package { padding: 20px; }
   footer { padding: 12px 16px; gap: 4px; }
   .footer-left, .footer-right { gap: 0; }
@@ -113,7 +115,7 @@ md-filled-tonal-button:not(:defined)[disabled] { opacity: .5; }
 md-icon-button:not(:defined) { display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--md-sys-color-on-surface-variant); }
 md-menu:not(:defined) { display: none; }
 </style>
-  <script type="module" src="app.3cae9a18200ac2f3.js"></script>
+  <script type="module" src="app.3560970abb4159a9.js"></script>
 </head>
 <body>
   <main>
@@ -172,6 +174,7 @@ md-menu:not(:defined) { display: none; }
               <md-filled-tonal-button data-target="linux-x64-rpm" data-platform="Linux x64 .rpm" disabled><svg slot="icon" aria-hidden="true"><use href="assets/actions.svg?v=3297066bd8138bb0#download"></use></svg><span data-i18n="downloadAction">下载</span></md-filled-tonal-button>
             </div>
             </div>
+            <md-divider class="architecture-divider"></md-divider>
             <div class="architecture-group" role="group" aria-label="ARM64">
             <div class="package-option">
               <div class="package-details"><div class="package-spec"><span class="architecture">ARM64</span><span class="package-format">.deb</span></div><span class="package-size" data-size-for="linux-arm64" hidden></span></div>
