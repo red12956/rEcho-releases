@@ -15,6 +15,21 @@
           "sha256": "c1780180fad2876305f65d715aa6beba90fb3a15e0fdcc6cf36fdf509babb949"
         }
       ]
+    },
+    "windows": {
+      "schema": 1,
+      "version": "27.0.10147",
+      "build": 10147,
+      "notes": "## 更新内容\n\n- 改善附件删除动画，预览平滑收缩淡出，避免对话列表闪烁。\n- 附件在消息流中靠右独立显示，统一图片圆角；移除按钮在悬停时淡入，也可长按访问。\n- 键盘／手写切换移到工具栏最右侧；优化设置操作行的高度和留白。\n\n## Changes\n\n- Smoothly collapse and fade removed attachments without flashing the conversation list.\n- Show attachments independently in the conversation flow with consistent image corners and hover or long-press removal.\n- Move keyboard/handwriting switching to the far right and improve settings row spacing.\n\nWindows x64 and Android ARM64. Android uses the existing permanent release signing key.\r\n",
+      "assets": [
+        {
+          "platform": "windows",
+          "arch": "x64",
+          "url": "https://github.com/red12956/rEcho-releases/releases/download/v27.0.10147/recho-windows-x64-setup.exe",
+          "size": 24091487,
+          "sha256": "5b29ad2ee2558e1599239d78e11c8e8108defb4b03358b372b62b616e3805317"
+        }
+      ]
     }
   }
 }
