@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="light dark">
   <meta name="description" content="rEcho — reading, handwriting, and questions.">
   <title>rEcho</title>
-  <link rel="icon" href="assets/app-icon.svg?v=7d8317f7d6a854a3" type="image/svg+xml">
+  <link rel="icon" href="assets/app-icon.svg?v=03bdb599da2cced2" type="image/svg+xml">
   <style>:root {
   color-scheme: light dark;
   --md-sys-color-primary: #2d568d;
@@ -114,20 +114,24 @@ md-filled-tonal-button:not(:defined) {
 md-filled-tonal-button:not(:defined)[disabled] { opacity: .5; }
 md-icon-button:not(:defined) { display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--md-sys-color-on-surface-variant); }
 md-menu:not(:defined) { display: none; }
+
+.apple-package { grid-column: 1 / -1; }
+.apple-platforms { min-width: 0; }
+.apple-package md-filled-tonal-button { flex-shrink: 0; }
 </style>
-  <script type="module" src="app.3560970abb4159a9.js"></script>
+  <script type="module" src="app.299555ec4565f65d.js"></script>
 </head>
 <body>
   <main>
     <header class="product-header">
-      <img class="app-icon" src="assets/app-icon.svg?v=7d8317f7d6a854a3" width="64" height="64" alt="">
+      <img class="app-icon" src="assets/app-icon.svg?v=03bdb599da2cced2" width="64" height="64" alt="">
       <h1>rEcho</h1>
     </header>
     <section aria-label="下载" id="downloads">
       <div class="downloads">
         <div class="download-column">
         <article class="package" data-system="windows">
-          <div class="package-heading"><svg class="platform-icon" aria-hidden="true"><use href="assets/actions.svg?v=3297066bd8138bb0#windows"></use></svg><h3>Windows</h3></div>
+          <div class="package-heading"><svg class="platform-icon" aria-hidden="true"><use href="assets/actions.svg?v=afdfa86a5cac79eb#windows"></use></svg><h3>Windows</h3></div>
           <div class="version-region">
             <md-circular-progress class="version-progress" indeterminate data-label="loading"></md-circular-progress>
             <p class="package-version" data-release-for="windows" hidden></p>
@@ -135,16 +139,16 @@ md-menu:not(:defined) { display: none; }
           <div class="package-options">
             <div class="package-option">
               <div class="package-details"><div class="package-spec"><span class="architecture">x64</span><span class="package-format">.exe</span></div><span class="package-size" data-size-for="windows-x64" hidden></span></div>
-              <md-filled-tonal-button data-target="windows-x64" data-platform="Windows x64 .exe" disabled><svg slot="icon" aria-hidden="true"><use href="assets/actions.svg?v=3297066bd8138bb0#download"></use></svg><span data-i18n="downloadAction">下载</span></md-filled-tonal-button>
+              <md-filled-tonal-button data-target="windows-x64" data-platform="Windows x64 .exe" disabled><svg slot="icon" aria-hidden="true"><use href="assets/actions.svg?v=afdfa86a5cac79eb#download"></use></svg><span data-i18n="downloadAction">下载</span></md-filled-tonal-button>
             </div>
             <div class="package-option">
               <div class="package-details"><div class="package-spec"><span class="architecture">ARM64</span><span class="package-format">.exe</span></div><span class="package-size" data-size-for="windows-arm64" hidden></span></div>
-              <md-filled-tonal-button data-target="windows-arm64" data-platform="Windows ARM64 .exe" disabled><svg slot="icon" aria-hidden="true"><use href="assets/actions.svg?v=3297066bd8138bb0#download"></use></svg><span data-i18n="downloadAction">下载</span></md-filled-tonal-button>
+              <md-filled-tonal-button data-target="windows-arm64" data-platform="Windows ARM64 .exe" disabled><svg slot="icon" aria-hidden="true"><use href="assets/actions.svg?v=afdfa86a5cac79eb#download"></use></svg><span data-i18n="downloadAction">下载</span></md-filled-tonal-button>
             </div>
           </div>
         </article>
         <article class="package" data-system="android">
-          <div class="package-heading"><svg class="platform-icon" aria-hidden="true"><use href="assets/actions.svg?v=3297066bd8138bb0#android"></use></svg><h3>Android</h3></div>
+          <div class="package-heading"><svg class="platform-icon" aria-hidden="true"><use href="assets/actions.svg?v=afdfa86a5cac79eb#android"></use></svg><h3>Android</h3></div>
           <div class="version-region">
             <md-circular-progress class="version-progress" indeterminate data-label="loading"></md-circular-progress>
             <p class="package-version" data-release-for="android" hidden></p>
@@ -152,13 +156,13 @@ md-menu:not(:defined) { display: none; }
           <div class="package-options">
             <div class="package-option">
               <div class="package-details"><div class="package-spec"><span class="architecture">ARM64</span><span class="package-format">.apk</span></div><span class="package-size" data-size-for="android-arm64" hidden></span></div>
-              <md-filled-tonal-button data-target="android-arm64" data-platform="Android ARM64 .apk" disabled><svg slot="icon" aria-hidden="true"><use href="assets/actions.svg?v=3297066bd8138bb0#download"></use></svg><span data-i18n="downloadAction">下载</span></md-filled-tonal-button>
+              <md-filled-tonal-button data-target="android-arm64" data-platform="Android ARM64 .apk" disabled><svg slot="icon" aria-hidden="true"><use href="assets/actions.svg?v=afdfa86a5cac79eb#download"></use></svg><span data-i18n="downloadAction">下载</span></md-filled-tonal-button>
             </div>
           </div>
         </article>
         </div>
         <article class="package linux-package" data-system="linux">
-          <div class="package-heading"><svg class="platform-icon" aria-hidden="true"><use href="assets/actions.svg?v=3297066bd8138bb0#linux"></use></svg><h3>Linux</h3></div>
+          <div class="package-heading"><svg class="platform-icon" aria-hidden="true"><use href="assets/actions.svg?v=afdfa86a5cac79eb#linux"></use></svg><h3>Linux</h3></div>
           <div class="version-region">
             <md-circular-progress class="version-progress" indeterminate data-label="loading"></md-circular-progress>
             <p class="package-version" data-release-for="linux" hidden></p>
@@ -167,25 +171,33 @@ md-menu:not(:defined) { display: none; }
             <div class="architecture-group" role="group" aria-label="x64">
             <div class="package-option">
               <div class="package-details"><div class="package-spec"><span class="architecture">x64</span><span class="package-format">.deb</span></div><span class="package-size" data-size-for="linux-x64" hidden></span></div>
-              <md-filled-tonal-button data-target="linux-x64" data-platform="Linux x64 .deb" disabled><svg slot="icon" aria-hidden="true"><use href="assets/actions.svg?v=3297066bd8138bb0#download"></use></svg><span data-i18n="downloadAction">下载</span></md-filled-tonal-button>
+              <md-filled-tonal-button data-target="linux-x64" data-platform="Linux x64 .deb" disabled><svg slot="icon" aria-hidden="true"><use href="assets/actions.svg?v=afdfa86a5cac79eb#download"></use></svg><span data-i18n="downloadAction">下载</span></md-filled-tonal-button>
             </div>
             <div class="package-option">
               <div class="package-details"><div class="package-spec"><span class="architecture">x64</span><span class="package-format">.rpm</span></div><span class="package-size" data-size-for="linux-x64-rpm" hidden></span></div>
-              <md-filled-tonal-button data-target="linux-x64-rpm" data-platform="Linux x64 .rpm" disabled><svg slot="icon" aria-hidden="true"><use href="assets/actions.svg?v=3297066bd8138bb0#download"></use></svg><span data-i18n="downloadAction">下载</span></md-filled-tonal-button>
+              <md-filled-tonal-button data-target="linux-x64-rpm" data-platform="Linux x64 .rpm" disabled><svg slot="icon" aria-hidden="true"><use href="assets/actions.svg?v=afdfa86a5cac79eb#download"></use></svg><span data-i18n="downloadAction">下载</span></md-filled-tonal-button>
             </div>
             </div>
             <md-divider class="architecture-divider"></md-divider>
             <div class="architecture-group" role="group" aria-label="ARM64">
             <div class="package-option">
               <div class="package-details"><div class="package-spec"><span class="architecture">ARM64</span><span class="package-format">.deb</span></div><span class="package-size" data-size-for="linux-arm64" hidden></span></div>
-              <md-filled-tonal-button data-target="linux-arm64" data-platform="Linux ARM64 .deb" disabled><svg slot="icon" aria-hidden="true"><use href="assets/actions.svg?v=3297066bd8138bb0#download"></use></svg><span data-i18n="downloadAction">下载</span></md-filled-tonal-button>
+              <md-filled-tonal-button data-target="linux-arm64" data-platform="Linux ARM64 .deb" disabled><svg slot="icon" aria-hidden="true"><use href="assets/actions.svg?v=afdfa86a5cac79eb#download"></use></svg><span data-i18n="downloadAction">下载</span></md-filled-tonal-button>
             </div>
             <div class="package-option">
               <div class="package-details"><div class="package-spec"><span class="architecture">ARM64</span><span class="package-format">.rpm</span></div><span class="package-size" data-size-for="linux-arm64-rpm" hidden></span></div>
-              <md-filled-tonal-button data-target="linux-arm64-rpm" data-platform="Linux ARM64 .rpm" disabled><svg slot="icon" aria-hidden="true"><use href="assets/actions.svg?v=3297066bd8138bb0#download"></use></svg><span data-i18n="downloadAction">下载</span></md-filled-tonal-button>
+              <md-filled-tonal-button data-target="linux-arm64-rpm" data-platform="Linux ARM64 .rpm" disabled><svg slot="icon" aria-hidden="true"><use href="assets/actions.svg?v=afdfa86a5cac79eb#download"></use></svg><span data-i18n="downloadAction">下载</span></md-filled-tonal-button>
             </div>
             </div>
           </div>
+        </article>
+        <article class="package apple-package" data-testflight-channel data-platform="iOS / iPadOS / macOS">
+          <div class="package-heading"><svg class="platform-icon" aria-hidden="true"><use href="assets/actions.svg?v=afdfa86a5cac79eb#apple"></use></svg><h3>Apple</h3></div>
+          <div class="version-region"><p class="package-version" id="apple-beta-status" data-beta-status>即将开放</p></div>
+          <div class="package-options"><div class="package-option">
+            <span class="package-details apple-platforms">iOS / iPadOS / macOS</span>
+            <md-filled-tonal-button data-testflight aria-describedby="apple-beta-status" disabled>TestFlight</md-filled-tonal-button>
+          </div></div>
         </article>
       </div>
     </section>
@@ -193,15 +205,15 @@ md-menu:not(:defined) { display: none; }
   </main>
   <footer>
     <div class="footer-left">
-      <md-icon-button href="https://github.com/red12956/rEcho-releases" data-label="github"><svg aria-hidden="true"><use href="assets/actions.svg?v=3297066bd8138bb0#github"></use></svg></md-icon-button>
+      <md-icon-button href="https://github.com/red12956/rEcho-releases" data-label="github"><svg aria-hidden="true"><use href="assets/actions.svg?v=afdfa86a5cac79eb#github"></use></svg></md-icon-button>
       <small>© <span id="copyright-year">2026</span> red12956</small>
     </div>
     <nav class="footer-right" aria-label="链接与语言">
       <span id="release-status" class="sr-only" role="status" aria-live="polite"></span>
-      <md-icon-button id="retry" data-label="retry" hidden><svg aria-hidden="true"><use href="assets/actions.svg?v=3297066bd8138bb0#refresh"></use></svg></md-icon-button>
-      <md-icon-button id="release-notes" data-label="releaseNotes" hidden><svg aria-hidden="true"><use href="assets/actions.svg?v=3297066bd8138bb0#history"></use></svg></md-icon-button>
+      <md-icon-button id="retry" data-label="retry" hidden><svg aria-hidden="true"><use href="assets/actions.svg?v=afdfa86a5cac79eb#refresh"></use></svg></md-icon-button>
+      <md-icon-button id="release-notes" data-label="releaseNotes" hidden><svg aria-hidden="true"><use href="assets/actions.svg?v=afdfa86a5cac79eb#history"></use></svg></md-icon-button>
       <div class="language-picker">
-        <md-icon-button id="language" data-label="languageLabel" aria-haspopup="listbox" aria-controls="language-menu" aria-expanded="false"><svg aria-hidden="true"><use href="assets/actions.svg?v=3297066bd8138bb0#translate"></use></svg></md-icon-button>
+        <md-icon-button id="language" data-label="languageLabel" aria-haspopup="listbox" aria-controls="language-menu" aria-expanded="false"><svg aria-hidden="true"><use href="assets/actions.svg?v=afdfa86a5cac79eb#translate"></use></svg></md-icon-button>
         <md-menu id="language-menu" anchor="language" positioning="fixed" anchor-corner="start-end" menu-corner="end-end" role="listbox" aria-label="语言">
           <md-menu-item type="option" data-locale="zh" aria-selected="true"><span slot="headline">简体中文</span></md-menu-item>
           <md-menu-item type="option" data-locale="en" aria-selected="false"><span slot="headline">English</span></md-menu-item>

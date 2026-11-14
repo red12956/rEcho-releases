@@ -28,3 +28,6 @@ Windows 11 and Linux brand glyphs are Simple Icons 11.15.0, pinned to
 commit 0af835e2949a9222965522780e5e0810d3c53382, icons/windows11.svg and icons/linux.svg.
 The icon collection is CC0-1.0; see SIMPLEICONS-LICENSE.txt. Brand names
 and marks identify the target platform, without endorsement or affiliation.
+
+Apple's platform glyph uses icons/apple.svg from the same pinned Simple Icons
+11.15.0 commit above (CC0-1.0). It identifies iOS/iPadOS and macOS targets.
