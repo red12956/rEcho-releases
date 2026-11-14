@@ -1,0 +1,20 @@
+{
+  "schema": 2,
+  "platforms": {
+    "android": {
+      "schema": 1,
+      "version": "27.0.10151",
+      "build": 10151,
+      "notes": "rEcho for Android ARM64.",
+      "assets": [
+        {
+          "platform": "android",
+          "arch": "arm64",
+          "url": "https://github.com/red12956/rEcho-releases/releases/download/v27.0.10151/recho-android-arm64.apk",
+          "size": 44654591,
+          "sha256": "c1780180fad2876305f65d715aa6beba90fb3a15e0fdcc6cf36fdf509babb949"
+        }
+      ]
+    }
+  }
+}
