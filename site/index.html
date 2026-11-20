@@ -71,6 +71,7 @@ md-filled-tonal-button svg { width: 18px; height: 18px; fill: currentColor; }
 footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 24px; }
 .footer-left, .footer-right { display: flex; align-items: center; gap: 8px; }
 footer small { color: var(--md-sys-color-on-surface-variant); font-size: 12px; }
+footer small a { color: inherit; text-underline-offset: 2px; }
 .language-picker { position: relative; }
 md-menu { min-width: 168px; --md-menu-container-color: var(--md-sys-color-surface-container); }
 md-menu-item[aria-selected="true"] { --md-menu-item-container-color: var(--md-sys-color-secondary-container); --md-menu-item-label-text-color: var(--md-sys-color-on-secondary-container); }
@@ -205,7 +206,7 @@ md-menu:not(:defined) { display: none; }
   <footer>
     <div class="footer-left">
       <md-icon-button href="https://github.com/red12956/rEcho-releases" data-label="github"><svg aria-hidden="true"><use href="assets/actions.svg?v=0aa6195d740403ca#github"></use></svg></md-icon-button>
-      <small>© <span id="copyright-year">2026</span> red12956</small>
+      <small>© <span id="copyright-year">2026</span> <a href="https://red12956.github.io/">red12956</a></small>
     </div>
     <nav class="footer-right" aria-label="链接与语言">
       <span id="release-status" class="sr-only" role="status" aria-live="polite"></span>
