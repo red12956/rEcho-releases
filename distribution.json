@@ -1,33 +1,78 @@
 {
   "schema": 2,
   "platforms": {
-    "android": {
-      "schema": 1,
-      "version": "27.0.10151",
-      "build": 10151,
-      "notes": "rEcho for Android ARM64.",
-      "assets": [
-        {
-          "platform": "android",
-          "arch": "arm64",
-          "url": "https://github.com/red12956/rEcho-releases/releases/download/v27.0.10151/recho-android-arm64.apk",
-          "size": 44654591,
-          "sha256": "c1780180fad2876305f65d715aa6beba90fb3a15e0fdcc6cf36fdf509babb949"
-        }
-      ]
-    },
     "windows": {
       "schema": 1,
-      "version": "27.0.10147",
-      "build": 10147,
-      "notes": "## 更新内容\n\n- 改善附件删除动画，预览平滑收缩淡出，避免对话列表闪烁。\n- 附件在消息流中靠右独立显示，统一图片圆角；移除按钮在悬停时淡入，也可长按访问。\n- 键盘／手写切换移到工具栏最右侧；优化设置操作行的高度和留白。\n\n## Changes\n\n- Smoothly collapse and fade removed attachments without flashing the conversation list.\n- Show attachments independently in the conversation flow with consistent image corners and hover or long-press removal.\n- Move keyboard/handwriting switching to the far right and improve settings row spacing.\n\nWindows x64 and Android ARM64. Android uses the existing permanent release signing key.\r\n",
+      "version": "27.0.10162",
+      "build": 10162,
+      "notes": "Windows x64 and ARM64, Linux x64 and ARM64 (DEB and RPM), and Android ARM64.\n\nThis release includes the latest assistant context and canvas navigation fixes, plus updates to Flutter and the PDF stack. iOS, iPadOS and macOS are distributed through TestFlight.\n",
       "assets": [
         {
           "platform": "windows",
           "arch": "x64",
-          "url": "https://github.com/red12956/rEcho-releases/releases/download/v27.0.10147/recho-windows-x64-setup.exe",
-          "size": 24091487,
-          "sha256": "5b29ad2ee2558e1599239d78e11c8e8108defb4b03358b372b62b616e3805317"
+          "url": "https://github.com/red12956/rEcho-releases/releases/download/v27.0.10162/recho-windows-x64-setup.exe",
+          "size": 24144010,
+          "sha256": "d7a97b68e109f25605324eb4e62d3d33d0b91e25e488e600967078de28acac5b"
+        },
+        {
+          "platform": "windows",
+          "arch": "arm64",
+          "url": "https://github.com/red12956/rEcho-releases/releases/download/v27.0.10162/recho-windows-arm64-setup.exe",
+          "size": 22542454,
+          "sha256": "091e4133ebeba1f083e50cfe8da7394f1481ad845679190546fde9e5ddc00be0"
+        }
+      ]
+    },
+    "linux": {
+      "schema": 1,
+      "version": "27.0.10162",
+      "build": 10162,
+      "notes": "Windows x64 and ARM64, Linux x64 and ARM64 (DEB and RPM), and Android ARM64.\n\nThis release includes the latest assistant context and canvas navigation fixes, plus updates to Flutter and the PDF stack. iOS, iPadOS and macOS are distributed through TestFlight.\n",
+      "assets": [
+        {
+          "platform": "linux",
+          "arch": "x64",
+          "url": "https://github.com/red12956/rEcho-releases/releases/download/v27.0.10162/recho-linux-x64.deb",
+          "size": 23391850,
+          "sha256": "9e76523a43b1c33ccdc074f1daaece8a3d35e3d03c4474cb416c125635272122"
+        },
+        {
+          "platform": "linux",
+          "arch": "arm64",
+          "url": "https://github.com/red12956/rEcho-releases/releases/download/v27.0.10162/recho-linux-arm64.deb",
+          "size": 22898258,
+          "sha256": "ade9054ebab48cdc5fad5723ca2c958d67ee56c361ac195a954d32e452112dc5"
+        }
+      ],
+      "installerDownloads": [
+        {
+          "platform": "linux",
+          "arch": "x64-rpm",
+          "url": "https://github.com/red12956/rEcho-releases/releases/download/v27.0.10162/recho-linux-x64.rpm",
+          "size": 29212356,
+          "sha256": "fede58fd48b16b522629d76680985ccc4015766994b708f443cd6c5a740ff45e"
+        },
+        {
+          "platform": "linux",
+          "arch": "arm64-rpm",
+          "url": "https://github.com/red12956/rEcho-releases/releases/download/v27.0.10162/recho-linux-arm64.rpm",
+          "size": 28724089,
+          "sha256": "0aee620b5fea7eb3e05926f7bdf7abb8a826ce59e9047dff5c850760c509196c"
+        }
+      ]
+    },
+    "android": {
+      "schema": 1,
+      "version": "27.0.10162",
+      "build": 10162,
+      "notes": "Windows x64 and ARM64, Linux x64 and ARM64 (DEB and RPM), and Android ARM64.\n\nThis release includes the latest assistant context and canvas navigation fixes, plus updates to Flutter and the PDF stack. iOS, iPadOS and macOS are distributed through TestFlight.\n",
+      "assets": [
+        {
+          "platform": "android",
+          "arch": "arm64",
+          "url": "https://github.com/red12956/rEcho-releases/releases/download/v27.0.10162/recho-android-arm64.apk",
+          "size": 44264395,
+          "sha256": "c450136f6f42978972977a84b674b8e5bf5008cfe1b1d645333ee726f4abaa21"
         }
       ]
     }
